@@ -1,0 +1,31 @@
+- name: Create a Virtual Machine
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: Create the VM
+    ovm_vm:
+      ovm_host: <ip and port of OVM Manager> 
+      ovm_user: <user>
+      ovm_pass: <password>
+      name: <name of instance>
+      server_pool: <name of server pool>
+      repository: <name of repository>
+      template: <name of template to clone>
+      memory: <memory in MB>
+      vcpu_cores: <num of cores>
+      vm_domain_type: 'XEN_HVM_PV_DRIVERS'
+      networks:
+        - name: <network name (eth0)>
+          description: <description of network>
+          mac: '00:00:00:00:00:00'
+          network: <network VLAN name>
+      disks:
+        - name: <name of disk>
+          description: <description of disk>
+          size: <size in GB>
+          sparse: <boolean>
+          repository: <repository name>
+      boot_order:
+        - PXE
+
